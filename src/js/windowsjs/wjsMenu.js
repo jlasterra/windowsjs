@@ -45,11 +45,6 @@ function Menu (svgMain, color) {
 
     function initialize () {
         create();
-
-        // menuCollection[3].itemObject.addEventListener("click", function(e) {
-        //     console.log('hola lucas');
-        // });
-
     }
 
     function create() {
