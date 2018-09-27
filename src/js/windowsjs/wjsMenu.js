@@ -9,48 +9,47 @@ function Menu (svgMain, color) {
             order: 1,
             id: 'item1',
             text: 'item 1',
-            callback: function() {console.log('item 1')},
             itemObject: {}
         },
         {
             order: 2,
             id: 'item2',
             text: 'item 2',
-            callback: function() {console.log('item 2')},
             itemObject: {}
         },
         {
             order: 3,
             id: 'item3',
             text: 'item 3',
-            callback: function() {console.log('item 3')},
             itemObject: {}
         },
         {
             order: 4,
             id: 'item4',
             text: 'item 4',
-            callback: function() {console.log('item 4')},
             itemObject: {}
         },
         {
             order: 5,
             id: 'item5',
             text: 'item 5',
-            callback: function() {console.log('item 5')},
             itemObject: {}
         },
         {
             order: 6,
             id: 'item6',
             text: 'item 6',
-            callback: function() {console.log('item 6')},
             itemObject: {}
         }
     ];
 
     function initialize () {
         create();
+
+        // menuCollection[3].itemObject.addEventListener("click", function(e) {
+        //     console.log('hola lucas');
+        // });
+
     }
 
     function create() {
@@ -67,6 +66,16 @@ function Menu (svgMain, color) {
             item.itemObject.setAttributeNS(null, 'fill', color);
             item.itemObject.setAttributeNS(null, 'id', item.id);
             item.itemObject.textContent = item.text;
+            item.itemObject.addEventListener("mouseover", function () { 
+                item.itemObject.setAttributeNS(null, 'class', 'clickable'); 
+            });
+            item.itemObject.addEventListener("mouseout", function () {
+                item.itemObject.setAttributeNS(null, 'class', '');
+            });
+            item.itemObject.addEventListener("click", function () {
+                console.log(item.text);
+            });
+
             svgMain.appendChild(item.itemObject);
 
             box = item.itemObject.getBBox();
