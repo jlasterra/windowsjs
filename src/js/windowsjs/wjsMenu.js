@@ -81,7 +81,7 @@ function Menu (svgMain, color) {
 
     function draw() {
         
-        var rec1 = document.getElementById('rec1');
+        var rec1 = document.getElementById('mdi_rec1');
         var parentX = rec1.getBBox().x;
         var parentY = rec1.getBBox().y;
 

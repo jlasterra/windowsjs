@@ -1,15 +1,14 @@
 import WjsMdiContainer from './WjsMdiContainer.js';
+import WjsContainer from './wjsContainer.js';
 
 function Wjs () {
 
     var wjsMdiContainer;
+    var wjsContainers;
 
     function initialize () {
         wjsMdiContainer = WjsMdiContainer();
         wjsMdiContainer.initialize();    
-    }
-
-    function draw () {
         wjsMdiContainer.draw(
             10, 
             10,
@@ -18,9 +17,16 @@ function Wjs () {
         );
     }
 
+    function createWindow () {
+        var wjsContainer = WjsContainer('w1');
+
+        wjsContainer.initialize();
+        wjsContainer.draw(100, 200, 300, 200);
+    } 
+
     return {
         initialize: initialize,
-        draw: draw
+        createWindow: createWindow
     };
 }
 

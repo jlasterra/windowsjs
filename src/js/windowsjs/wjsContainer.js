@@ -1,5 +1,3 @@
-import Menu from './wjsMenu.js';
-
 function getMousePosition(evt) {
 
     var svg = evt.target;
@@ -10,9 +8,7 @@ function getMousePosition(evt) {
     };
 }
 
-function WsjMdiContainer () {
-
-    var _menu;
+function WjsContainer (id) {
 
     var _color = '#ea9307';
     var _startX;
@@ -28,8 +24,6 @@ function WsjMdiContainer () {
     function initialize () {
 
         var svgMain = create();
-        _menu = Menu(svgMain, _color);
-        _menu.initialize();
 
         makeDraggable();
         makeSizable();
@@ -48,10 +42,9 @@ function WsjMdiContainer () {
     
         function startDrag(evt) {
             if (evt.target.classList.contains('draggable')) {
-                var targetElement = evt.target;
-
-
-                if (targetElement.id.startsWith('mdi_')) {
+                var targetElement = evt.target;                
+        
+                if (targetElement.id.startsWith(id + '_')) {
                     selectedElement = targetElement;
                 }
     
@@ -81,7 +74,7 @@ function WsjMdiContainer () {
         }
     }
 
-    function makeSizable(windowContainer) {
+    function makeSizable() {
 
         var offset = {};
         var selectedElement;
@@ -95,20 +88,20 @@ function WsjMdiContainer () {
         function startDrag(evt) {
 
             if (evt.target.classList.contains('sizable')) {
-                var targetElement = evt.target;
+                var targetElement = evt.target;                
         
-                if (targetElement.id.startsWith('mdi_')) {
+                if (targetElement.id.startsWith(id + '_')) {
                     selectedElement = targetElement;
+
+                    var mousePosition = getMousePosition(evt);
+
+                    var tri1 = document.getElementById(id + '_tri1');
+                    var pointsString = tri1.getAttributeNS(null, 'points');
+                    var endpoint = pointsString.split(' ')[0].split(',');
+
+                    offset.x = endpoint[0] - mousePosition.x;
+                    offset.y = endpoint[1] - mousePosition.y;
                 }
-
-                var mousePosition = getMousePosition(evt);
-
-                var tri1 = document.getElementById('mdi_tri1');
-                var pointsString = tri1.getAttributeNS(null, 'points');
-                var endpoint = pointsString.split(' ')[0].split(',');
-
-                offset.x = endpoint[0] - mousePosition.x;
-                offset.y = endpoint[1] - mousePosition.y;
             }
         }
         
@@ -139,38 +132,35 @@ function WsjMdiContainer () {
 
     function create () {
 
-        var svgMain = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svgMain.setAttribute('width',window.innerWidth);
-        svgMain.setAttribute('height',window.innerHeight);
-        svgMain.setAttribute('id','svgMain');
+        var svgMain = document.getElementById('svgMain');
     
         var rec1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        rec1.setAttributeNS(null, 'id', 'mdi_rec1');
+        rec1.setAttributeNS(null, 'id', id + '_rec1');
         svgMain.appendChild(rec1);
     
         var line1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line1.setAttributeNS(null, 'id', 'mdi_line1');
+        line1.setAttributeNS(null, 'id', id + '_line1');
         svgMain.appendChild(line1);
     
         var line2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line2.setAttributeNS(null, 'id', 'mdi_line2');
+        line2.setAttributeNS(null, 'id', id + '_line2');
         svgMain.appendChild(line2);
     
         var rec2 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        rec2.setAttributeNS(null, 'id', 'mdi_rec2');
+        rec2.setAttributeNS(null, 'id', id + '_rec2');
         rec2.setAttributeNS(null, 'class', 'draggable');
         svgMain.appendChild(rec2);
     
         var line3 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line3.setAttributeNS(null, 'id', 'mdi_line3');
+        line3.setAttributeNS(null, 'id', id + '_line3');
         svgMain.appendChild(line3);
     
         var line4 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line4.setAttributeNS(null, 'id', 'mdi_line4');
+        line4.setAttributeNS(null, 'id', id + '_line4');
         svgMain.appendChild(line4);
     
         var tri1 = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-        tri1.setAttributeNS(null, 'id', 'mdi_tri1');
+        tri1.setAttributeNS(null, 'id', id + '_tri1');
         tri1.setAttributeNS(null, 'class', 'sizable');
         svgMain.appendChild(tri1);
     
@@ -190,7 +180,7 @@ function WsjMdiContainer () {
 
         var offset3 = Math.round( _offsetLine2 / 4 );
     
-        var rec1 = document.getElementById('mdi_rec1');
+        var rec1 = document.getElementById(id + '_rec1');
         rec1.setAttributeNS(null, 'x', _startX);
         rec1.setAttributeNS(null, 'y', _startY);
         rec1.setAttributeNS(null, 'width', _width);
@@ -198,7 +188,7 @@ function WsjMdiContainer () {
         rec1.setAttributeNS(null, 'stroke', _color);
         rec1.setAttributeNS(null, 'stroke-width', '1'); 
     
-        var rec2 = document.getElementById('mdi_rec2');
+        var rec2 = document.getElementById(id + '_rec2');
         rec2.setAttributeNS(null, 'x', _startX);
         rec2.setAttributeNS(null, 'y', _startY);
         rec2.setAttributeNS(null, 'width', _width);
@@ -206,7 +196,7 @@ function WsjMdiContainer () {
         rec2.setAttributeNS(null, 'stroke', _color);
         rec2.setAttributeNS(null, 'stroke-width', '1'); 
     
-        var line1 = document.getElementById('mdi_line1');
+        var line1 = document.getElementById(id + '_line1');
         line1.setAttributeNS(null, 'x1', _startX);
         line1.setAttributeNS(null, 'y1', _startY + _offsetLine1);
         line1.setAttributeNS(null, 'x2', _width + _startX);
@@ -214,7 +204,7 @@ function WsjMdiContainer () {
         line1.setAttributeNS(null, 'stroke', _color);
         line1.setAttributeNS(null, 'stroke-width', '1');
         
-        var line2 = document.getElementById('mdi_line2');
+        var line2 = document.getElementById(id + '_line2');
         line2.setAttributeNS(null, 'x1', _startX);
         line2.setAttributeNS(null, 'y1', _height + _startY - _offsetLine2);
         line2.setAttributeNS(null, 'x2', _width + _startX);
@@ -222,7 +212,7 @@ function WsjMdiContainer () {
         line2.setAttributeNS(null, 'stroke', _color);
         line2.setAttributeNS(null, 'stroke-width', '1');
     
-        var tri1 = document.getElementById('mdi_tri1');
+        var tri1 = document.getElementById(id + '_tri1');
         var tri1Points = [ [_width + _startX, _height + _startY], 
             [_width + _startX - ( offset3 * 3 ) , _height + _startY],
             [_width + _startX, _height + _startY - ( offset3 * 3 )] 
@@ -237,7 +227,7 @@ function WsjMdiContainer () {
         tri1.setAttributeNS(null, 'stroke-width', '1'); 
         tri1.setAttributeNS(null, 'fill-opacity', '0'); 
     
-        var line3 = document.getElementById('mdi_line3');
+        var line3 = document.getElementById(id + '_line3');
         line3.setAttributeNS(null, 'x1', _width + _startX - ( offset3 * 2));
         line3.setAttributeNS(null, 'y1', _height + _startY);
         line3.setAttributeNS(null, 'x2', _width + _startX);
@@ -245,21 +235,20 @@ function WsjMdiContainer () {
         line3.setAttributeNS(null, 'stroke', _color);
         line3.setAttributeNS(null, 'stroke-width', '1');
     
-        var line4 = document.getElementById('mdi_line4');
+        var line4 = document.getElementById(id + '_line4');
         line4.setAttributeNS(null, 'x1', _width + _startX - ( offset3));
         line4.setAttributeNS(null, 'y1', _height + _startY);
         line4.setAttributeNS(null, 'x2', _width + _startX);
         line4.setAttributeNS(null, 'y2', _height + _startY - (offset3));
         line4.setAttributeNS(null, 'stroke', _color);
         line4.setAttributeNS(null, 'stroke-width', '1');
-
-        _menu.draw();
     }
  
     return {
+        id: id,
         initialize: initialize,
         draw: draw
     }
 }
 
-export default WsjMdiContainer;
+export default WjsContainer;
