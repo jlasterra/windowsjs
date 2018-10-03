@@ -33,7 +33,6 @@ function WjsContainer (svgMain, id) {
     
         var offset;
         var selectedElement;
-        // var svgMain =  document.getElementById('svgMain');
     
         svgMain.addEventListener('mousedown', startDrag);
         svgMain.addEventListener('mousemove', drag);
@@ -46,11 +45,11 @@ function WjsContainer (svgMain, id) {
         
                 if (targetElement.id.startsWith(id + '_')) {
                     selectedElement = targetElement;
+
+                    offset = getMousePosition(evt);
+                    offset.x -= parseFloat(selectedElement.getAttributeNS(null, "x"));
+                    offset.y -= parseFloat(selectedElement.getAttributeNS(null, "y"));
                 }
-    
-                offset = getMousePosition(evt);
-                offset.x -= parseFloat(selectedElement.getAttributeNS(null, "x"));
-                offset.y -= parseFloat(selectedElement.getAttributeNS(null, "y"));            
             }
         }
         

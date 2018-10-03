@@ -37,10 +37,15 @@ function Wjs () {
     }
 
     function createWindow () {
-        var wjsContainer = WjsContainer(svgMain, 'w1');
+        var wjsContainer_1 = WjsContainer(svgMain, 'w1');
 
-        wjsContainer.initialize();
-        wjsContainer.draw(100, 200, 300, 200);
+        wjsContainer_1.initialize();
+        wjsContainer_1.draw(100, 200, 300, 200);
+
+        var wjsContainer_2 = WjsContainer(svgMain, 'w2');
+
+        wjsContainer_2.initialize();
+        wjsContainer_2.draw(100, 200, 300, 200);
     } 
 
     return {
