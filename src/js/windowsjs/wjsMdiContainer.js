@@ -10,7 +10,7 @@ function getMousePosition(evt) {
     };
 }
 
-function WsjMdiContainer () {
+function WsjMdiContainer (svgMain) {
 
     var _menu;
 
@@ -27,7 +27,8 @@ function WsjMdiContainer () {
 
     function initialize () {
 
-        var svgMain = create();
+        //var svgMain = create();
+        create();
         _menu = Menu(svgMain, _color);
         _menu.initialize();
 
@@ -39,7 +40,7 @@ function WsjMdiContainer () {
     
         var offset;
         var selectedElement;
-        var svgMain =  document.getElementById('svgMain');
+        //var svgMain =  document.getElementById('svgMain');
     
         svgMain.addEventListener('mousedown', startDrag);
         svgMain.addEventListener('mousemove', drag);
@@ -85,7 +86,7 @@ function WsjMdiContainer () {
 
         var offset = {};
         var selectedElement;
-        var svgMain =  document.getElementById('svgMain');
+        //var svgMain =  document.getElementById('svgMain');
     
         svgMain.addEventListener('mousedown', startDrag);
         svgMain.addEventListener('mousemove', drag);
@@ -139,14 +140,17 @@ function WsjMdiContainer () {
 
     function create () {
 
-        var svgMain = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svgMain.setAttribute('width',window.innerWidth);
-        svgMain.setAttribute('height',window.innerHeight);
-        svgMain.setAttribute('id','svgMain');
+        // var svgMain = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        // svgMain.setAttribute('width',window.innerWidth);
+        // svgMain.setAttribute('height',window.innerHeight);
+        // svgMain.setAttribute('id','svgMain');
     
         var rec1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
         rec1.setAttributeNS(null, 'id', 'mdi_rec1');
         svgMain.appendChild(rec1);
+
+        console.log('hola');
+        console.log(svgMain);
     
         var line1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line1.setAttributeNS(null, 'id', 'mdi_line1');
@@ -176,7 +180,7 @@ function WsjMdiContainer () {
     
         document.body.appendChild(svgMain);
 
-        return svgMain;
+        //return svgMain;
 
     }
 

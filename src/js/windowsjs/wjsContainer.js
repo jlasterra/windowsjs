@@ -8,7 +8,7 @@ function getMousePosition(evt) {
     };
 }
 
-function WjsContainer (id) {
+function WjsContainer (svgMain, id) {
 
     var _color = '#ea9307';
     var _startX;
@@ -33,7 +33,7 @@ function WjsContainer (id) {
     
         var offset;
         var selectedElement;
-        var svgMain =  document.getElementById('svgMain');
+        // var svgMain =  document.getElementById('svgMain');
     
         svgMain.addEventListener('mousedown', startDrag);
         svgMain.addEventListener('mousemove', drag);
