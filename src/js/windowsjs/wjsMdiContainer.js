@@ -34,20 +34,26 @@ function WsjMdiContainer (svgMain) {
 
     function create () {
     
+        var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.setAttribute('id', 'mdi');
+        g.setAttribute('shape-rendering', 'inherit');
+        g.setAttribute('pointer-events', 'all');
+
         var rec1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
         rec1.setAttributeNS(null, 'id', 'mdi_rec1');
-        svgMain.appendChild(rec1);
+        g.appendChild(rec1);
     
         var line1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line1.setAttributeNS(null, 'id', 'mdi_line1');
-        svgMain.appendChild(line1);
+        g.appendChild(line1);
     
         var line2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line2.setAttributeNS(null, 'id', 'mdi_line2');
-        svgMain.appendChild(line2);
+        g.appendChild(line2);
     
-        document.body.appendChild(svgMain);
+        svgMain.appendChild(g);
 
+        document.body.appendChild(svgMain);
     }
 
     function draw (posX, posY, width, height) {
@@ -85,6 +91,11 @@ function WsjMdiContainer (svgMain) {
         line2.setAttributeNS(null, 'stroke-width', '1');
 
         _menu.draw();
+
+        var g = document.getElementById('mdi');
+        g.setAttribute(null, 'fill', '#00ccFF');
+        //g.style.fill = '#226633';
+
     }
  
     return {
