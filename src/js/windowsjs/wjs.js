@@ -1,6 +1,8 @@
 import WjsMdiContainer from './WjsMdiContainer.js';
 import WjsContainer from './wjsContainer.js';
 
+import WjsContainers from './wjsContainers.js';
+
 function Wjs () {
 
     var svgMain;
@@ -40,12 +42,12 @@ function Wjs () {
         var wjsContainer_1 = WjsContainer(svgMain, 'w1');
 
         wjsContainer_1.initialize();
-        wjsContainer_1.draw(100, 200, 300, 200);
+        wjsContainer_1.draw(650, 100, 300, 200);
 
         var wjsContainer_2 = WjsContainer(svgMain, 'w2');
 
         wjsContainer_2.initialize();
-        wjsContainer_2.draw(100, 200, 300, 200);
+        wjsContainer_2.draw(100, 350, 600, 400);
     } 
 
     return {

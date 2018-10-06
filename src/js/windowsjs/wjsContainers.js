@@ -1,14 +1,15 @@
 import WjsContainer from './wjsContainer.js'
 
-function WjsContainers () {
+function WjsContainers (svgMain, mdi) {
     
     var containers = [];
+    var containersViewList = [];
+    var mainArea;
+    var mousePosition;
+
+
  
     function addContainer (id) {
-
-        
-
-
         return {}
     }
 
