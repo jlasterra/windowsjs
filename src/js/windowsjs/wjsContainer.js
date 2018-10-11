@@ -1,7 +1,10 @@
 
-function WjsContainer (svgMain, id) {
+function WjsContainer (svgMain, id, title) {
 
+    var _id = id;
     var _color = '#ea9307';
+    var menuFontFamily = 'Verdana';
+    var menuFontSize = 10;
     var _startX;
     var _startY;
     var _width;
@@ -17,7 +20,7 @@ function WjsContainer (svgMain, id) {
 
     function init (posX, posY, width, height) {
 
-        var svgMain = create();
+        create();
         draw(posX, posY, width, height);
     }
 
@@ -54,11 +57,18 @@ function WjsContainer (svgMain, id) {
         tri1.setAttributeNS(null, 'id', id + '_tri1');
         tri1.setAttributeNS(null, 'class', 'sizable');
         svgMain.appendChild(tri1);
+
+        var title1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        // title1.setAttributeNS(null, 'x', posTitleX);
+        // title1.setAttributeNS(null, 'y', posTitleY);
+        // title1.setAttributeNS(null, 'font-family', menuFontFamily);
+        // title1.setAttributeNS(null, 'font-size', menuFontSize);
+        // title1.setAttributeNS(null, 'fill', _color);
+        title1.setAttributeNS(null, 'id', id + '_title1');
+        //title1.textContent = title;
+        svgMain.appendChild(title1);
     
         document.body.appendChild(svgMain);
-
-        return svgMain;
-
     }
 
     function draw (posX, posY, width, height) {
@@ -133,6 +143,16 @@ function WjsContainer (svgMain, id) {
         line4.setAttributeNS(null, 'y2', _height + _startY - (offset3));
         line4.setAttributeNS(null, 'stroke', _color);
         line4.setAttributeNS(null, 'stroke-width', '1');
+
+
+        var title1 = document.getElementById(id + '_title1');
+        title1.setAttributeNS(null, 'x', _startX + 10);
+        title1.setAttributeNS(null, 'y', _startY + 14);
+        title1.setAttributeNS(null, 'font-family', menuFontFamily);
+        title1.setAttributeNS(null, 'font-size', menuFontSize);
+        title1.setAttributeNS(null, 'fill', _color);
+        title1.setAttributeNS(null, 'id', id + '_title1');
+        title1.textContent = title;
     }
 
     function startDrag (mousePos) {

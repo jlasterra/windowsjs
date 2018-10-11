@@ -57,8 +57,8 @@ function WjsContainers (svgMain, mdi) {
 
     function addContainer (id) {
 
-        var wjsContainer = WjsContainer(svgMain, id);
-        wjsContainer.init(650, 100, 300, 200);
+        var wjsContainer = WjsContainer(svgMain, id, 'form #' + id);
+        wjsContainer.init(350, 100, 300, 200);
 
         containers.push(wjsContainer);
     }

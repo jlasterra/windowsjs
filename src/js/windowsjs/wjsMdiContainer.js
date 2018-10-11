@@ -100,6 +100,7 @@ function WsjMdiContainer (svgMain) {
 
     return {
         init: init,
+        draw: draw,
         isMouseIntoMainArea: isMouseIntoMainArea
     }
 }
