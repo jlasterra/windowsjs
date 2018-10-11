@@ -1,30 +1,29 @@
-import WjsMdiContainer from './WjsMdiContainer.js';
-import WjsContainer from './wjsContainer.js';
+import EventEmitter2 from 'eventemitter2';
 
+import WjsMdiContainer from './WjsMdiContainer.js';
 import WjsContainers from './wjsContainers.js';
+//import WjsContainer from './wjsContainer.js';
 
 function Wjs () {
+
+    window.EVT = new EventEmitter2();
 
     var svgMain;
     var wjsMdiContainer;
     var wjsContainers;
 
-    function initialize () {
+    function init () {
 
         svgMain = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svgMain.setAttribute('width',window.innerWidth);
         svgMain.setAttribute('height',window.innerHeight);
         svgMain.setAttribute('id','svgMain');
 
-        wjsMdiContainer = WjsMdiContainer(svgMain);
-        wjsMdiContainer.initialize();    
-        wjsMdiContainer.draw(
-            10, 
-            10,
-            window.innerWidth - 20, 
-            window.innerHeight - 20 
-        );
+        EVT.on('menuItemClicked', menuItemClicked);
 
+        wjsMdiContainer = WjsMdiContainer(svgMain);
+        wjsMdiContainer.init( 10, 10, window.innerWidth - 20, window.innerHeight - 20);    
+        
         window.addEventListener('resize', function() {
             svgMain.setAttribute('width',window.innerWidth);
             svgMain.setAttribute('height',window.innerHeight);
@@ -36,23 +35,17 @@ function Wjs () {
                 window.innerHeight - 20 
             );
         });
+
+        wjsContainers = WjsContainers(svgMain, wjsMdiContainer);
     }
 
-    function createWindow () {
-        var wjsContainer_1 = WjsContainer(svgMain, 'w1');
-
-        wjsContainer_1.initialize();
-        wjsContainer_1.draw(650, 100, 300, 200);
-
-        var wjsContainer_2 = WjsContainer(svgMain, 'w2');
-
-        wjsContainer_2.initialize();
-        wjsContainer_2.draw(100, 350, 600, 400);
-    } 
+    function menuItemClicked (id) {
+        console.log('menuItemClicked _ ' + id);
+        wjsContainers.addContainer(id);
+    }
 
     return {
-        initialize: initialize,
-        createWindow: createWindow
+        init: init
     };
 }
 

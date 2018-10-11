@@ -9,8 +9,6 @@ var wjs;
 function initializeWindowsJS(){
 
     wjs = Wjs();
-    wjs.initialize();
-    //wjs.draw();
+    wjs.init();
 
-    wjs.createWindow();
 }

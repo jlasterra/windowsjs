@@ -1,12 +1,3 @@
-function getMousePosition(evt) {
-
-    var svg = evt.target;
-    var ctm = svg.getScreenCTM();
-    return {
-        x: (evt.clientX - ctm.e) / ctm.a,
-        y: (evt.clientY - ctm.f) / ctm.d
-    };
-}
 
 function WjsContainer (svgMain, id) {
 
@@ -17,116 +8,17 @@ function WjsContainer (svgMain, id) {
     var _height;
     var _offsetLine1 = 20;
     var _offsetLine2 = 20;
+    var offset3;
+
+    var _offset = { x: 0, y:0 };
 
     var _minWidth = 200;
     var _minHeight = 100;
 
-    function initialize () {
+    function init (posX, posY, width, height) {
 
         var svgMain = create();
-
-        makeDraggable();
-        makeSizable();
-    }
-
-    function makeDraggable() {
-    
-        var offset;
-        var selectedElement;
-    
-        svgMain.addEventListener('mousedown', startDrag);
-        svgMain.addEventListener('mousemove', drag);
-        svgMain.addEventListener('mouseup', endDrag);
-        svgMain.addEventListener('mouseleave', endDrag);
-    
-        function startDrag(evt) {
-            if (evt.target.classList.contains('draggable')) {
-                var targetElement = evt.target;                
-        
-                if (targetElement.id.startsWith(id + '_')) {
-                    selectedElement = targetElement;
-
-                    offset = getMousePosition(evt);
-                    offset.x -= parseFloat(selectedElement.getAttributeNS(null, "x"));
-                    offset.y -= parseFloat(selectedElement.getAttributeNS(null, "y"));
-                }
-            }
-        }
-        
-        function drag(evt) {
-            if (selectedElement) {
-                evt.preventDefault();
-                var coord = getMousePosition(evt);
-        
-                _startX = coord.x - offset.x;
-                _startY = coord.y - offset.y;
-
-                draw (
-                    _startX,
-                    _startY
-                );
-            }
-        }
-        
-        function endDrag(evt) {
-            selectedElement = null;
-        }
-    }
-
-    function makeSizable() {
-
-        var offset = {};
-        var selectedElement;
-        var svgMain =  document.getElementById('svgMain');
-    
-        svgMain.addEventListener('mousedown', startDrag);
-        svgMain.addEventListener('mousemove', drag);
-        svgMain.addEventListener('mouseup', endDrag);
-        svgMain.addEventListener('mouseleave', endDrag);
-    
-        function startDrag(evt) {
-
-            if (evt.target.classList.contains('sizable')) {
-                var targetElement = evt.target;                
-        
-                if (targetElement.id.startsWith(id + '_')) {
-                    selectedElement = targetElement;
-
-                    var mousePosition = getMousePosition(evt);
-
-                    var tri1 = document.getElementById(id + '_tri1');
-                    var pointsString = tri1.getAttributeNS(null, 'points');
-                    var endpoint = pointsString.split(' ')[0].split(',');
-
-                    offset.x = endpoint[0] - mousePosition.x;
-                    offset.y = endpoint[1] - mousePosition.y;
-                }
-            }
-        }
-        
-        function drag(evt) {
-
-            if (selectedElement) {
-                evt.preventDefault();
-                var coord = getMousePosition(evt);
-                
-                _width = coord.x + offset.x - _startX;
-                _height = coord.y + offset.y - _startY;
-    
-                if (_width > _minWidth && _height > _minHeight) {
-                    draw (
-                        _startX,
-                        _startY,
-                        _width,
-                        _height
-                    );
-                }
-            }
-        }
-        
-        function endDrag(evt) {
-            selectedElement = null;
-        }
+        draw(posX, posY, width, height);
     }
 
     function create () {
@@ -177,7 +69,7 @@ function WjsContainer (svgMain, id) {
         if (width) _width = width;
         if (height) _height = height;
 
-        var offset3 = Math.round( _offsetLine2 / 4 );
+        offset3 = Math.round( _offsetLine2 / 4 );
     
         var rec1 = document.getElementById(id + '_rec1');
         rec1.setAttributeNS(null, 'x', _startX);
@@ -242,11 +134,142 @@ function WjsContainer (svgMain, id) {
         line4.setAttributeNS(null, 'stroke', _color);
         line4.setAttributeNS(null, 'stroke-width', '1');
     }
+
+    function startDrag (mousePos) {
+        if (mousePos) {
+            _offset.x = mousePos.x -  _startX;
+            _offset.y = mousePos.y -  _startY;
+        }
+    }
+
+    function drag (mousePos) {
+
+        var x = mousePos.x - _offset.x;
+        var y = mousePos.y - _offset.y;
+
+        draw (x, y);
+    }
+
+    function startResize (mousePos) {
+        if (mousePos) {
+
+            var tri1 = document.getElementById(id + '_tri1');
+            var pointsString = tri1.getAttributeNS(null, 'points');
+            var endpoint = pointsString.split(' ')[0].split(',');
+
+            _offset.x = endpoint[0] - mousePos.x;
+            _offset.y = endpoint[1] - mousePos.y;
+        }
+    }
+
+    function resize (mousePos) {
+
+        _width = mousePos.x + _offset.x - _startX;
+        _height = mousePos.y + _offset.y - _startY;
+
+        if (_width > _minWidth && _height > _minHeight) {
+            draw (
+                _startX,
+                _startY,
+                _width,
+                _height
+            );
+        }
+    }
+ 
+    function isMouseIntoMainArea (mousePos) {
+
+        return (
+                    ( mousePos.x > _startX ) 
+                    && 
+                    ( mousePos.y > ( _startY + _offsetLine1 ) )
+                )
+                && 
+                (
+                    ( mousePos.x < ( _startX + _width ) )
+                    && 
+                    ( mousePos.y < ( _startX + _height - _offsetLine2 ) ) 
+                ) ;
+
+    }
+ 
+    function isMouseIntoTotalArea (mousePos) {
+
+        return (
+                    ( mousePos.x > _startX ) 
+                    && 
+                    ( mousePos.y > _startY )
+                )
+                && 
+                (
+                    ( mousePos.x < ( _startX + _width ) )
+                    && 
+                    ( mousePos.y < ( _startY + _height ) ) 
+                ) ;
+
+    }
+ 
+    function isMouseIntoDragArea (mousePos) {
+
+        return (
+                    ( mousePos.x > _startX ) 
+                    && 
+                    ( mousePos.y > _startY )
+                )
+                && 
+                (
+                    ( mousePos.x < ( _startX + _width ) )
+                    && 
+                    ( mousePos.y < ( _startY + _offsetLine1 ) ) 
+                ) ;
+
+    }
+ 
+    function isMouseIntoResizeArea (mousePos) {
+
+        var p1 = { 
+            x: _startX + _width - ( offset3 * 3 ),
+            y: _startY + _height
+        }
+
+        var p2 = { 
+            x: _startX + _width,
+            y: _startY + _height - ( offset3 * 3 )
+        }
+
+        var a = ( p2.y - p1.y ) / ( p2.x - p1.x );
+
+        var c = ( ( ( p2.x - p1.x ) * p1.y )  -  (  ( p2.y - p1.y ) * p1.x )  ) / ( p2.x - p1.x );
+
+        return (
+                    ( mousePos.x > p1.x ) 
+                    && 
+                    ( mousePos.y > p2.y )
+                )
+                && 
+                (
+                    ( mousePos.x < p2.x )
+                    && 
+                    ( mousePos.y < p1.y ) 
+                )
+                &&
+                (
+                    mousePos.y >= ( ( a * mousePos.x ) + c )
+                ) ;
+
+    }
  
     return {
         id: id,
-        initialize: initialize,
-        draw: draw
+        init: init,
+        startDrag: startDrag,
+        drag: drag,
+        startResize: startResize,
+        resize: resize,
+        isMouseIntoTotalArea: isMouseIntoTotalArea,
+        isMouseIntoMainArea: isMouseIntoMainArea,
+        isMouseIntoDragArea: isMouseIntoDragArea,
+        isMouseIntoResizeArea: isMouseIntoResizeArea
     }
 }
 

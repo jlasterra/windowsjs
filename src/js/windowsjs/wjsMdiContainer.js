@@ -1,15 +1,5 @@
 import Menu from './wjsMenu.js';
 
-function getMousePosition(evt) {
-
-    var svg = evt.target;
-    var ctm = svg.getScreenCTM();
-    return {
-        x: (evt.clientX - ctm.e) / ctm.a,
-        y: (evt.clientY - ctm.f) / ctm.d
-    };
-}
-
 function WsjMdiContainer (svgMain) {
 
     var _menu;
@@ -22,14 +12,12 @@ function WsjMdiContainer (svgMain) {
     var _offsetLine1 = 20;
     var _offsetLine2 = 20;
 
-    var _minWidth = 200;
-    var _minHeight = 100;
-
-    function initialize () {
+    function init (posX, posY, width, height) {
 
         create();
+        draw(posX, posY, width, height);
         _menu = Menu(svgMain, _color);
-        _menu.initialize();
+        _menu.init();
     }
 
     function create () {
@@ -73,12 +61,6 @@ function WsjMdiContainer (svgMain) {
         rec1.setAttributeNS(null, 'height', _height);
         rec1.setAttributeNS(null, 'stroke', _color);
         rec1.setAttributeNS(null, 'stroke-width', '1'); 
-
-        // var leave = function () { console.log('leave'); };
-
-        // rec1.addEventListener('mouseenter', function() { console.log('enter')});
-        // rec1.addEventListener('mouseleave', leave);
-        // //rec1.removeEventListener('mouseleave', leave, false);
     
         var line1 = document.getElementById('mdi_line1');
         line1.setAttributeNS(null, 'x1', _startX);
@@ -96,17 +78,29 @@ function WsjMdiContainer (svgMain) {
         line2.setAttributeNS(null, 'stroke', _color);
         line2.setAttributeNS(null, 'stroke-width', '1');
 
-        _menu.draw();
-
         var g = document.getElementById('mdi');
-        //g.setAttribute(null, 'fill', '#00ccFF');
-        g.style.fill = '#226633';
-        
+        g.style.fill = '#226633';        
     }
  
+    function isMouseIntoMainArea (mousePos) {
+
+        return (
+                    ( mousePos.x > _startX ) 
+                    && 
+                    ( mousePos.y > ( _startY + _offsetLine1 ) )
+                )
+                && 
+                (
+                    ( mousePos.x < ( _startX + _width ) )
+                    && 
+                    ( mousePos.y < ( _startY + _height - _offsetLine2 ) ) 
+                ) ;
+
+    }
+
     return {
-        initialize: initialize,
-        draw: draw
+        init: init,
+        isMouseIntoMainArea: isMouseIntoMainArea
     }
 }
 

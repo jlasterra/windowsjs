@@ -43,8 +43,9 @@ function Menu (svgMain, color) {
         }
     ];
 
-    function initialize () {
+    function init () {
         create();
+        draw();
     }
 
     function create() {
@@ -68,7 +69,7 @@ function Menu (svgMain, color) {
                 item.itemObject.setAttributeNS(null, 'class', '');
             });
             item.itemObject.addEventListener("click", function () {
-                console.log(item.text);
+                EVT.emit('menuItemClicked', item.id);
             });
 
             svgMain.appendChild(item.itemObject);
@@ -100,8 +101,7 @@ function Menu (svgMain, color) {
     };
 
     return {
-        initialize: initialize,
-        draw: draw
+        init: init
     };
 }
 
