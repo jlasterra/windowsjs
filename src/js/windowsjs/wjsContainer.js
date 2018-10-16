@@ -13,7 +13,7 @@ function WjsContainer (svgMain, id, title) {
     var _offsetLine2 = 20;
     var offset3;
 
-    var _offset = { x: 0, y:0 };
+    var _offset = { x: 0, y: 0 };
 
     var _minWidth = 200;
     var _minHeight = 100;
@@ -26,49 +26,46 @@ function WjsContainer (svgMain, id, title) {
 
     function create () {
 
-        var svgMain = document.getElementById('svgMain');
+        var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.setAttribute('id', id + '_containerGroup');
+        g.setAttribute('shape-rendering', 'inherit');
+        g.setAttribute('pointer-events', 'all');
     
         var rec1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
         rec1.setAttributeNS(null, 'id', id + '_rec1');
-        svgMain.appendChild(rec1);
+        g.appendChild(rec1);
     
         var line1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line1.setAttributeNS(null, 'id', id + '_line1');
-        svgMain.appendChild(line1);
+        g.appendChild(line1);
     
         var line2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line2.setAttributeNS(null, 'id', id + '_line2');
-        svgMain.appendChild(line2);
+        g.appendChild(line2);
     
         var rec2 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
         rec2.setAttributeNS(null, 'id', id + '_rec2');
         rec2.setAttributeNS(null, 'class', 'draggable');
-        svgMain.appendChild(rec2);
+        g.appendChild(rec2);
     
         var line3 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line3.setAttributeNS(null, 'id', id + '_line3');
-        svgMain.appendChild(line3);
+        g.appendChild(line3);
     
         var line4 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line4.setAttributeNS(null, 'id', id + '_line4');
-        svgMain.appendChild(line4);
+        g.appendChild(line4);
     
         var tri1 = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
         tri1.setAttributeNS(null, 'id', id + '_tri1');
         tri1.setAttributeNS(null, 'class', 'sizable');
-        svgMain.appendChild(tri1);
+        g.appendChild(tri1);
 
         var title1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        // title1.setAttributeNS(null, 'x', posTitleX);
-        // title1.setAttributeNS(null, 'y', posTitleY);
-        // title1.setAttributeNS(null, 'font-family', menuFontFamily);
-        // title1.setAttributeNS(null, 'font-size', menuFontSize);
-        // title1.setAttributeNS(null, 'fill', _color);
         title1.setAttributeNS(null, 'id', id + '_title1');
-        //title1.textContent = title;
-        svgMain.appendChild(title1);
-    
-        document.body.appendChild(svgMain);
+        g.appendChild(title1);
+
+        svgMain.appendChild(g);
     }
 
     function draw (posX, posY, width, height) {
@@ -280,7 +277,7 @@ function WjsContainer (svgMain, id, title) {
     }
  
     return {
-        id: id,
+        id: _id,
         init: init,
         startDrag: startDrag,
         drag: drag,

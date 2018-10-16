@@ -2,7 +2,6 @@ import EventEmitter2 from 'eventemitter2';
 
 import WjsMdiContainer from './WjsMdiContainer.js';
 import WjsContainers from './wjsContainers.js';
-//import WjsContainer from './wjsContainer.js';
 
 function Wjs () {
 
@@ -18,6 +17,7 @@ function Wjs () {
         svgMain.setAttribute('width',window.innerWidth);
         svgMain.setAttribute('height',window.innerHeight);
         svgMain.setAttribute('id','svgMain');
+        document.body.appendChild(svgMain);
 
         EVT.on('menuItemClicked', menuItemClicked);
 

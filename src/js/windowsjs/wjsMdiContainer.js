@@ -40,8 +40,6 @@ function WsjMdiContainer (svgMain) {
         g.appendChild(line2);
     
         svgMain.appendChild(g);
-
-        document.body.appendChild(svgMain);
     }
 
     function draw (posX, posY, width, height) {
