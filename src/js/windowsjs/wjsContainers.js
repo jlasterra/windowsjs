@@ -77,34 +77,13 @@ function WjsContainers (svgMain, mdi) {
             svgMain.removeChild(containerGroup);
             svgMain.appendChild(containerGroup);
 
-            console.log('containers 1 ');
-            console.log(containers);
-
             var index = containers.indexOf(activeContainer);
-            //console.log(index);
-
             containers.splice( containers.length, 0, containers.splice(index, 1)[0] );
-
-            console.log('containers 2 ');
-            console.log(containers);
-
-            // Array.prototype.move = function (from, to) {
-            //     this.splice(to, 0, this.splice(from, 1)[0]);
-            // };
         }        
     }
 
-    function addContainer (id) {
-        //containers.push(wjsContainer);
-    }
-
-    function removeContainer (id) {
-    }
-
     return {   
-        createContainer: createContainer,     
-        //addContainer: addContainer,
-        removeContainer: removeContainer
+        createContainer: createContainer
     }
 }
 
