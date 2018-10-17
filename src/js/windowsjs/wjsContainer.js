@@ -15,8 +15,8 @@ function WjsContainer (svgMain, id, title) {
 
     var _offset = { x: 0, y: 0 };
 
-    var _minWidth = 200;
-    var _minHeight = 100;
+    var _minWidth = 50;
+    var _minHeight = 50;
 
     function init (posX, posY, width, height) {
 

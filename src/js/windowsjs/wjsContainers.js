@@ -24,11 +24,18 @@ function WjsContainers (svgMain, mdi) {
         if (mdi.isMouseIntoMainArea(initialMousePos)) {
             
             activeContainer = undefined;
-            activeContainer = containers.find( function (element) {
+            var underMouseContainers = containers.filter( function (element) {
                 return element.isMouseIntoTotalArea(initialMousePos);
             });
-    
+            underMouseContainers.reverse();
+            activeContainer = underMouseContainers.find( function (element) {
+                return element.isMouseIntoTotalArea(initialMousePos);
+            });
+
             if (activeContainer) {
+                
+                pushContainer(activeContainer);
+
                 isDragging = activeContainer.isMouseIntoDragArea(initialMousePos);
                 isResizing = activeContainer.isMouseIntoResizeArea(initialMousePos);
     
@@ -55,20 +62,48 @@ function WjsContainers (svgMain, mdi) {
         activeContainer = undefined;
     }
 
-    function addContainer (id) {
+    function createContainer (id) {
 
         var wjsContainer = WjsContainer(svgMain, id, 'form #' + id);
         wjsContainer.init(350, 100, 300, 200);
 
         containers.push(wjsContainer);
     }
+    
+    function pushContainer (activeContainer) {
+        var containerGroup = document.getElementById(activeContainer.id + '_containerGroup');
 
-    function removeContainer (id) {
+        if(containerGroup){
+            svgMain.removeChild(containerGroup);
+            svgMain.appendChild(containerGroup);
 
+            console.log('containers 1 ');
+            console.log(containers);
+
+            var index = containers.indexOf(activeContainer);
+            //console.log(index);
+
+            containers.splice( containers.length, 0, containers.splice(index, 1)[0] );
+
+            console.log('containers 2 ');
+            console.log(containers);
+
+            // Array.prototype.move = function (from, to) {
+            //     this.splice(to, 0, this.splice(from, 1)[0]);
+            // };
+        }        
     }
 
-    return {        
-        addContainer: addContainer,
+    function addContainer (id) {
+        //containers.push(wjsContainer);
+    }
+
+    function removeContainer (id) {
+    }
+
+    return {   
+        createContainer: createContainer,     
+        //addContainer: addContainer,
         removeContainer: removeContainer
     }
 }

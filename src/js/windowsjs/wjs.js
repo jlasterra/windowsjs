@@ -41,7 +41,7 @@ function Wjs () {
 
     function menuItemClicked (id) {
         console.log('menuItemClicked _ ' + id);
-        wjsContainers.addContainer(id);
+        wjsContainers.createContainer(id);
     }
 
     return {
