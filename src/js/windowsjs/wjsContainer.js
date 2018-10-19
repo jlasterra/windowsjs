@@ -101,13 +101,6 @@ function WjsContainer (svgMain, id, title) {
         rec1.setAttributeNS(null, 'stroke', _color);
         rec1.setAttributeNS(null, 'stroke-width', '1'); 
     
-
-
-
-
-
-
-
         var rec11 = document.getElementById(id + '_rec11');
         rec11.setAttributeNS(null, 'x', _startX);
         rec11.setAttributeNS(null, 'y', _startY);
@@ -139,35 +132,6 @@ function WjsContainer (svgMain, id, title) {
         rec14.setAttributeNS(null, 'height', _offsetLine2);
         rec14.setAttributeNS(null, 'stroke', _color);
         rec14.setAttributeNS(null, 'stroke-width', '1'); 
-
-
-
-
-
-        // var iconsSquare1 = document.getElementById(id + '_iconsSquare1');
-        // console.log(iconsSquare1);
-        // iconsSquare1.setAttributeNS(null, 'x', 1 + _startX + _width - ( _offsetLine1 * 1) );
-        // iconsSquare1.setAttributeNS(null, 'y', 1 + _startY);
-        // iconsSquare1.setAttributeNS(null, 'width', _offsetLine1 - 2);
-        // iconsSquare1.setAttributeNS(null, 'height', _offsetLine1 - 2);
-        // iconsSquare1.setAttributeNS(null, 'stroke', _color);
-        // iconsSquare1.setAttributeNS(null, 'stroke-width', '1'); 
-
-        // iconsSquare1.addEventListener("mouseover", function () { 
-        //     iconsSquare1.setAttributeNS(null, 'class', 'clickable'); 
-        // });
-        // iconsSquare1.addEventListener("mouseout", function () {
-        //     iconsSquare1.setAttributeNS(null, 'class', '');
-        // });
-        // iconsSquare1.addEventListener("click", function () {
-        //     console.log('asdf');
-        //     EVT.emit('containerIconClicked', iconsSquare1.id);
-        // });
-
-
-
-
-
 
         var line1 = document.getElementById(id + '_line1');
         line1.setAttributeNS(null, 'x1', _startX);
@@ -224,51 +188,6 @@ function WjsContainer (svgMain, id, title) {
         title1.setAttributeNS(null, 'fill', _color);
         title1.setAttributeNS(null, 'id', id + '_title1');
         title1.textContent = title;
-
-        // //icons
-        // var iconsLine1 = document.getElementById(id + '_iconsLine1');
-        // iconsLine1.setAttributeNS(null, 'x1', _startX + _width - _offsetLine1);
-        // iconsLine1.setAttributeNS(null, 'y1', _startY);
-        // iconsLine1.setAttributeNS(null, 'x2', _startX + _width - _offsetLine1);
-        // iconsLine1.setAttributeNS(null, 'y2', _startY + _offsetLine1);
-        // iconsLine1.setAttributeNS(null, 'stroke', _color);
-        // iconsLine1.setAttributeNS(null, 'stroke-width', '1');
-
-        // var iconsLine2 = document.getElementById(id + '_iconsLine2');
-        // iconsLine2.setAttributeNS(null, 'x1', _startX + _width - ( _offsetLine1 * 2) );
-        // iconsLine2.setAttributeNS(null, 'y1', _startY);
-        // iconsLine2.setAttributeNS(null, 'x2', _startX + _width - ( _offsetLine1 * 2) );
-        // iconsLine2.setAttributeNS(null, 'y2', _startY + _offsetLine1);
-        // iconsLine2.setAttributeNS(null, 'stroke', _color);
-        // iconsLine2.setAttributeNS(null, 'stroke-width', '1');
-        
-        // var iconsLine3 = document.getElementById(id + '_iconsLine3');
-        // iconsLine3.setAttributeNS(null, 'x1', _startX + _width - ( _offsetLine1 * 3) );
-        // iconsLine3.setAttributeNS(null, 'y1', _startY);
-        // iconsLine3.setAttributeNS(null, 'x2', _startX + _width - ( _offsetLine1 * 3) );
-        // iconsLine3.setAttributeNS(null, 'y2', _startY + _offsetLine1);
-        // iconsLine3.setAttributeNS(null, 'stroke', _color);
-        // iconsLine3.setAttributeNS(null, 'stroke-width', '1');
-
-        // var iconsSquare1 = document.getElementById(id + '_iconsSquare1');
-        // console.log(iconsSquare1);
-        // iconsSquare1.setAttributeNS(null, 'x', 1 + _startX + _width - ( _offsetLine1 * 1) );
-        // iconsSquare1.setAttributeNS(null, 'y', 1 + _startY);
-        // iconsSquare1.setAttributeNS(null, 'width', _offsetLine1 - 2);
-        // iconsSquare1.setAttributeNS(null, 'height', _offsetLine1 - 2);
-        // iconsSquare1.setAttributeNS(null, 'stroke', _color);
-        // iconsSquare1.setAttributeNS(null, 'stroke-width', '1'); 
-
-        // iconsSquare1.addEventListener("mouseover", function () { 
-        //     iconsSquare1.setAttributeNS(null, 'class', 'clickable'); 
-        // });
-        // iconsSquare1.addEventListener("mouseout", function () {
-        //     iconsSquare1.setAttributeNS(null, 'class', '');
-        // });
-        // iconsSquare1.addEventListener("click", function () {
-        //     console.log('asdf');
-        //     EVT.emit('containerIconClicked', iconsSquare1.id);
-        // });
     }
 
     function startDrag (mousePos) {
