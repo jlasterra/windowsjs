@@ -20,7 +20,8 @@ function Wjs () {
         document.body.appendChild(svgMain);
 
         EVT.on('menuItemClicked', menuItemClicked);
-
+        EVT.on('containerIconClicked', containerIconClicked);
+        
         wjsMdiContainer = WjsMdiContainer(svgMain);
         wjsMdiContainer.init( 10, 10, window.innerWidth - 20, window.innerHeight - 20);    
         
@@ -42,6 +43,10 @@ function Wjs () {
     function menuItemClicked (id) {
         console.log('menuItemClicked _ ' + id);
         wjsContainers.createContainer(id);
+    }
+
+    function containerIconClicked (id) {
+        console.log('containerIconClicked _ ' + id);
     }
 
     return {
