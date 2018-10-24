@@ -62,6 +62,30 @@ function WjsContainer (svgMain, id, title) {
         rec14.setAttributeNS(null, 'id', id + '_rec14');
         rec14.setAttributeNS(null, 'class', 'clickable');
         g.appendChild(rec14);
+
+        var icon1_1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        icon1_1.setAttributeNS(null, 'id', id + '_icon1_1');
+        g.appendChild(icon1_1);
+
+        var icon1_2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        icon1_2.setAttributeNS(null, 'id', id + '_icon1_2');
+        g.appendChild(icon1_2);
+
+        var icon2_1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        icon2_1.setAttributeNS(null, 'id', id + '_icon2_1');
+        g.appendChild(icon2_1);
+
+        var icon3_1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        icon3_1.setAttributeNS(null, 'id', id + '_icon3_1');
+        g.appendChild(icon3_1);
+
+        var icon3_2 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        icon3_2.setAttributeNS(null, 'id', id + '_icon3_2');
+        g.appendChild(icon3_2);
+
+        var icon4_1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        icon4_1.setAttributeNS(null, 'id', id + '_icon4_1');
+        g.appendChild(icon4_1);
     
         var line3 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line3.setAttributeNS(null, 'id', id + '_line3');
@@ -104,34 +128,74 @@ function WjsContainer (svgMain, id, title) {
         var rec11 = document.getElementById(id + '_rec11');
         rec11.setAttributeNS(null, 'x', _startX);
         rec11.setAttributeNS(null, 'y', _startY);
-        rec11.setAttributeNS(null, 'width', _width - ( _offsetLine1 * 3 ) );
+        rec11.setAttributeNS(null, 'width', _width - ( _offsetLine1 * 4.5 ) );
         rec11.setAttributeNS(null, 'height', _offsetLine1);
         rec11.setAttributeNS(null, 'stroke', _color);
         rec11.setAttributeNS(null, 'stroke-width', '1'); 
     
         var rec12 = document.getElementById(id + '_rec12');
-        rec12.setAttributeNS(null, 'x', _startX + _width - ( _offsetLine1 * 3 ) );
+        rec12.setAttributeNS(null, 'x', _startX + _width - ( _offsetLine1 * 4.5 ) );
         rec12.setAttributeNS(null, 'y', _startY);
-        rec12.setAttributeNS(null, 'width', _offsetLine1);
+        rec12.setAttributeNS(null, 'width', _offsetLine1 * 1.5);
         rec12.setAttributeNS(null, 'height', _offsetLine2);
         rec12.setAttributeNS(null, 'stroke', _color);
         rec12.setAttributeNS(null, 'stroke-width', '1'); 
     
         var rec13 = document.getElementById(id + '_rec13');
-        rec13.setAttributeNS(null, 'x', _startX + _width - ( _offsetLine1 * 2 ) );
+        rec13.setAttributeNS(null, 'x', _startX + _width - ( _offsetLine1 * 3 ) );
         rec13.setAttributeNS(null, 'y', _startY);
-        rec13.setAttributeNS(null, 'width', _offsetLine1);
+        rec13.setAttributeNS(null, 'width', _offsetLine1 * 1.5);
         rec13.setAttributeNS(null, 'height', _offsetLine2);
         rec13.setAttributeNS(null, 'stroke', _color);
         rec13.setAttributeNS(null, 'stroke-width', '1'); 
     
-        var rec14 = document.getElementById(id + '_rec14');        
-        rec14.setAttributeNS(null, 'x', _startX + _width - ( _offsetLine1 * 1 ) );
+        var rec14 = document.getElementById(id + '_rec14'); 
+        rec14.setAttributeNS(null, 'x', _startX + _width - ( _offsetLine1 * 1.5 ) );
         rec14.setAttributeNS(null, 'y', _startY);
-        rec14.setAttributeNS(null, 'width', _offsetLine1);
+        rec14.setAttributeNS(null, 'width', _offsetLine1 * 1.5);
         rec14.setAttributeNS(null, 'height', _offsetLine2);
         rec14.setAttributeNS(null, 'stroke', _color);
         rec14.setAttributeNS(null, 'stroke-width', '1'); 
+
+
+        var icon1_1 = document.getElementById(id + '_icon1_1');
+        icon1_1.setAttributeNS(null, 'x1', _startX + _width - ( _offsetLine1 * 1.5 ) + ( _offsetLine1 / 3 ) );
+        icon1_1.setAttributeNS(null, 'y1', _startY + ( _offsetLine1 / 6 ) );
+        icon1_1.setAttributeNS(null, 'x2', _startX + _width - ( _offsetLine1 / 3 ) );
+        icon1_1.setAttributeNS(null, 'y2', _startY + _offsetLine1 - ( _offsetLine1 / 6 ));
+        icon1_1.setAttributeNS(null, 'stroke', _color);
+        icon1_1.setAttributeNS(null, 'stroke-width', '1');
+
+        var icon1_2 = document.getElementById(id + '_icon1_2');
+        icon1_2.setAttributeNS(null, 'x1', _startX + _width - ( _offsetLine1 / 3 ) );
+        icon1_2.setAttributeNS(null, 'y1', _startY + ( _offsetLine1 / 6 ) );
+        icon1_2.setAttributeNS(null, 'x2', _startX + _width - ( _offsetLine1 * 1.5 ) + ( _offsetLine1 / 3 ) );
+        icon1_2.setAttributeNS(null, 'y2', _startY + _offsetLine1 - ( _offsetLine1 / 6 ));
+        icon1_2.setAttributeNS(null, 'stroke', _color);
+        icon1_2.setAttributeNS(null, 'stroke-width', '1');
+
+        var icon2_1 = document.getElementById(id + '_icon2_1');
+        icon2_1.setAttributeNS(null, 'x', _startX + _width - ( _offsetLine1 * 3 ) + ( _offsetLine1 / 3 ) );
+        icon2_1.setAttributeNS(null, 'y', _startY + ( _offsetLine1 / 6 ) );
+        icon2_1.setAttributeNS(null, 'width', ( _offsetLine1 / 2 ) );
+        icon2_1.setAttributeNS(null, 'height',( _offsetLine1 / 2 ) );
+        icon2_1.setAttributeNS(null, 'stroke', _color);
+        icon2_1.setAttributeNS(null, 'stroke-width', '1'); 
+
+        var icon3_1 = document.getElementById(id + '_icon3_1');
+
+        var icon3_2 = document.getElementById(id + '_icon3_2');
+
+        var icon4_1 = document.getElementById(id + '_icon4_1');
+        icon4_1.setAttributeNS(null, 'x1', _startX + _width - ( _offsetLine1 * 4.5 ) + ( _offsetLine1 / 3 ) );
+        icon4_1.setAttributeNS(null, 'y1', _startY + _offsetLine1 - ( _offsetLine1 / 6 ));
+        icon4_1.setAttributeNS(null, 'x2', _startX + _width - ( _offsetLine1 * 4.5 ) + ( _offsetLine1 ) );
+        icon4_1.setAttributeNS(null, 'y2', _startY + _offsetLine1 - ( _offsetLine1 / 6 ));
+        icon4_1.setAttributeNS(null, 'stroke', _color);
+        icon4_1.setAttributeNS(null, 'stroke-width', '1');
+
+
+
 
         var line1 = document.getElementById(id + '_line1');
         line1.setAttributeNS(null, 'x1', _startX);
